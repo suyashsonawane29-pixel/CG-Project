@@ -1,0 +1,113 @@
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+
+// Doraemon drawing function (outline only)
+void drawDoraemon(int offsetX, int offsetY) {
+    // Head
+    ellipse(300 + offsetX, 150 + offsetY, -53, 233, 140, 130);
+
+    // Eyes
+    ellipse(272 + offsetX, 75 + offsetY, 0, 360, 27, 30);
+    ellipse(327 + offsetX, 75 + offsetY, 0, 360, 27, 30);
+    ellipse(280 + offsetX, 74 + offsetY, 0, 360, 7, 10);
+    ellipse(315 + offsetX, 74 + offsetY, 0, 360, 7, 10);
+    fillellipse(283 + offsetX, 73 + offsetY, 1, 3);
+    fillellipse(312 + offsetX, 73 + offsetY, 1, 3);
+    fillellipse(295 + offsetX, 105 + offsetY, 1, 3);
+
+    // Nose
+    circle(299 + offsetX, 110 + offsetY, 15);
+
+    // Mouth
+    line(300 + offsetX, 125 + offsetY, 300 + offsetX, 170 + offsetY);
+    line(280 + offsetX, 170 + offsetY, 320 + offsetX, 170 + offsetY);
+    ellipse(295 + offsetX, 173 + offsetY, 190, -8, 80, 70);
+
+    // Face lines
+    arc(293 + offsetX, 320 + offsetY, 95, 109, 150);
+    arc(309 + offsetX, 320 + offsetY, 73, 86, 150);
+    arc(223 + offsetX, 152 + offsetY, 260, 310, 34);
+    arc(373 + offsetX, 150 + offsetY, 230, 260, 34);
+    ellipse(220 + offsetX, 156 + offsetY, 60, 280, 25, 30);
+    ellipse(372 + offsetX, 154 + offsetY, -100, 120, 25, 30);
+
+    // Whiskers
+    line(270 + offsetX, 128 + offsetY, 215 + offsetX, 114 + offsetY);
+  line(270 + offsetX, 137 + offsetY, 215 + offsetX, 150 + offsetY);
+    line(270 + offsetX, 147 + offsetY, 215 + offsetX, 160 + offsetY);
+    line(330 + offsetX, 128 + offsetY, 385 + offsetX, 110 + offsetY);
+    line(330 + offsetX, 137 + offsetY, 385 + offsetX, 137 + offsetY);
+    line(330 + offsetX, 147 + offsetY, 385 + offsetX, 160 + offsetY);
+
+    // Bell
+    circle(300 + offsetX, 300 + offsetY, 20);
+    circle(300 + offsetX, 305 + offsetY, 4);
+    line(300 + offsetX, 309 + offsetY, 300 + offsetX, 320 + offsetY);
+    line(282 + offsetX, 295 + offsetY, 318 + offsetX, 295 + offsetY);
+    line(282 + offsetX, 290 + offsetY, 318 + offsetX, 290 + offsetY);
+
+    // Body
+    ellipse(300 + offsetX, 325 + offsetY, 130, 410, 80, 65);
+
+    // Hands
+    line(383 + offsetX, 264 + offsetY, 455 + offsetX, 324 + offsetY);
+    line(389 + offsetX, 325 + offsetY, 435 + offsetX, 350 + offsetY);
+    line(210 + offsetX, 290 + offsetY, 210 + offsetX, 415 + offsetY);
+    line(390 + offsetX, 300 + offsetY, 390 + offsetX, 415 + offsetY);
+
+    // Feet joints
+    ellipse(390 + offsetX, 435 + offsetY, 0, 90, 8, 20);
+    arc(300 + offsetX, 450 + offsetY, 0, 180, 20);
+    ellipse(210 + offsetX, 435 + offsetY, 90, 180, 8, 20);
+
+    // Pocket
+    arc(300 + offsetX, 330 + offsetY, 186, 355, 45);
+    line(255 + offsetX, 335 + offsetY, 345 + offsetX, 335 + offsetY);
+
+    // Left hand
+    line(145 + offsetX, 200 + offsetY, 225 + offsetX, 260 + offsetY);
+    line(120 + offsetX, 225 + offsetY, 211 + offsetX, 320 + offsetY);
+    circle(122 + offsetX, 202 + offsetY, 25);
+
+    // Right hand
+    arc(425 + offsetX, 323 + offsetY, 290, -1, 30);
+    arc(460 + offsetX, 350 + offsetY, 183, 100, 25);
+
+    // Feet
+    line(199 + offsetX, 434 + offsetY, 282 + offsetX, 450 + offsetY);
+    ellipse(230 + offsetX, 450 + offsetY, 125, 360, 50, 20);
+    line(319 + offsetX, 450 + offsetY, 405 + offsetX, 435 + offsetY);
+    ellipse(370 + offsetX, 450 + offsetY, 170, 416, 50, 20);
+}
+
+void main() {
+    int gd = DETECT, gm;
+    int posX = 0;
+    int key;
+
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+
+    // Show instructions
+    outtextxy(10, 10, "Use LEFT and RIGHT arrow keys to move Doraemon");
+    outtextxy(10, 30, "Press ESC to exit");
+
+    while (1) {
+        cleardevice();
+
+        drawDoraemon(posX, 0);
+
+        key = getch();
+        if (key == 0) {  // special key
+            key = getch();
+            if (key == 75)       // Left arrow
+                posX -= 10;
+            else if (key == 77)  // Right arrow
+                posX += 10;
+        } else if (key == 27) {
+            break;  // ESC to exit
+        }
+    }
+
+    closegraph();
+}
